@@ -5,8 +5,7 @@ import onnxruntime as ort
 import numpy as np
 
 def run_inference(file):
-    print(file)
-
+    
     # read file
     npimg = np.fromstring(file.read(), np.uint8)
     image = cv2.imdecode(npimg,1)
@@ -18,15 +17,13 @@ def run_inference(file):
     # reshape
     ipt = np.reshape(gray, (1,1,28,28))
 
-    # init. onnx runtime
+    # init. onnx runtime inference session
     ort_sess = ort.InferenceSession('mnist-7.onnx')
-
-    # for  in ort_sess.get_inputs():
-    arg = ort_sess.get_inputs()[0]
+    
+    # run. ort session
     outputs = ort_sess.run(None, {'Input3': ipt})
     
     # Print Result
     result = outputs[0].argmax(axis=1)
 
     return int(result[0])
-
