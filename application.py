@@ -1,7 +1,7 @@
 from flask import Flask
+from flask import request
 import inferencer as inf
 import json
-from flask import request
 
 app = Flask(__name__)
 
