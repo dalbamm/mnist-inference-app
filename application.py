@@ -6,6 +6,7 @@ import json
 app = Flask(__name__)
 
 inferencer = inf.Inferencer()
+inferencer.set_option()
 
 @app.route('/')
 def hello_world():
@@ -19,10 +20,11 @@ def inference_uploaded_file():
 @app.route('/inference_queue', methods=['POST'])
 def inference_uploaded_file_queue():
     f = request.files['img']
+    {"status":"error", "message": e.message() }
     return {"result": inferencer.run_inference_queue(f)}
 
 
-@app.route('/inference_multi_s', methods=['POST'])
+@app.route('/inference?params=multi & threading=multi', methods=['POST'])
 def inference_uploaded_multi_files_serial():
     f = request.files.getlist('img')
     # print(f)

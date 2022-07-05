@@ -11,8 +11,7 @@ class Inferencer:
     session = None
     option = None
     flag_parallel = False
-    pool = ThreadPool(4)
-
+    
     def __init__(self):
         self.session = ort.InferenceSession('mnist-7.onnx')        
 
@@ -106,7 +105,7 @@ class Inferencer:
     
         threads=[]
 
-        pool = self.pool        
+        pool = ThreadPool(4)
         result = pool.map(self.run_inference, files)
         pool.close()
         pool.join()        
